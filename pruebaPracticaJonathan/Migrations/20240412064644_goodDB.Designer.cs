@@ -12,7 +12,7 @@ using pruebaPracticaJonathan.Connection;
 namespace pruebaPracticaJonathan.Migrations
 {
     [DbContext(typeof(DbContexto))]
-    [Migration("20240411122908_goodDB")]
+    [Migration("20240412064644_goodDB")]
     partial class goodDB
     {
         /// <inheritdoc />
@@ -35,7 +35,8 @@ namespace pruebaPracticaJonathan.Migrations
 
                     b.Property<string>("name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("id");
 
@@ -78,7 +79,8 @@ namespace pruebaPracticaJonathan.Migrations
 
                     b.Property<string>("name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Id");
 
