@@ -1,4 +1,4 @@
-﻿namespace pruebaPracticaJonathan.Managers
+﻿namespace pruebaPracticaJonathan.Models
 {
     public class orderDetail
     {
