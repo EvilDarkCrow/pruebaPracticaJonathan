@@ -1,8 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Azure;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
+using Newtonsoft.Json;
 using pruebaPracticaJonathan.Connection;
 using pruebaPracticaJonathan.Models;
+using RestSharp;
+using System;
+using System.Runtime.InteropServices.Marshalling;
+using System.Threading;
 using static pruebaPracticaJonathan.Managers.Manager;
 
 namespace pruebaPracticaJonathan.Managers
@@ -40,12 +46,52 @@ namespace pruebaPracticaJonathan.Managers
             return listFiltering;
         }
 
-
-        public class orderDetail
+        public async Task<List<postDetail>> GetPosts()
         {
-            public string memberName { get; set; }
-            public string productName { get; set; }
-            public long orderId { get; set; }
+            var client = new RestClient("https://jsonplaceholder.typicode.com");
+            var request = new RestRequest("/comments", Method.Get);
+            var queryResult = client.Execute(request);
+            if(queryResult.IsSuccessful)
+            {
+
+                var jsonContent = queryResult.Content;
+                List<Posts> comments = JsonConvert.DeserializeObject<List<Posts>>(jsonContent);
+
+                var listFiltering = comments
+                    .GroupBy(p => p.postId)
+                    .OrderByDescending(g => g.Count())
+                    .Take(3)
+                    .Select(g => new
+                    {
+                        id = g.Key,
+                        commentAmount = g.Count()
+                    });
+
+                List <postDetail> returnedList = new List<postDetail>();
+
+                foreach(var a in listFiltering)
+                {
+                    returnedList.Add(new postDetail
+                    {
+                        id = a.id,
+                        commentAmount = a.commentAmount
+                    });
+                   
+                }
+
+                return returnedList;
+
+            } else
+            {
+                return null;
+            }
+            
+            
         }
+
+
+        
+
+        
     }
 }

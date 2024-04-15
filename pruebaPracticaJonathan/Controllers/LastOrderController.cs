@@ -22,9 +22,17 @@ namespace pruebaPracticaJonathan.Controllers
 
         [HttpGet]
         [Route("getLastOrder")]
-        public async Task<ActionResult<Manager.orderDetail>> getLastOrder()
+        public async Task<ActionResult<orderDetail>> getLastOrder()
         {
             var entities = await manager.GetMemberAndLastOrder();
+            return Ok(entities);
+        }
+
+        [HttpGet]
+        [Route("getPosts")]
+        public async Task<ActionResult<Posts>> getPosts()
+        {
+            var entities = await manager.GetPosts();
             return Ok(entities);
         }
 
