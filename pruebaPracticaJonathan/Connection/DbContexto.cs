@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using pruebaPracticaJonathan.Models;
+using pruebaPracticaJonathan.Managers;
 
 namespace pruebaPracticaJonathan.Connection
 {
@@ -29,6 +30,10 @@ namespace pruebaPracticaJonathan.Connection
                 .WithMany()
                 .HasForeignKey(o => o.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Ignore<Posts>();
+            modelBuilder.Ignore<orderDetail>();
+            modelBuilder.Ignore<postDetail>();
         }
 
     }
