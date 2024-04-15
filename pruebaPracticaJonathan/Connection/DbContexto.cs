@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using pruebaPracticaJonathan.Models;
-using pruebaPracticaJonathan.Managers;
 
 namespace pruebaPracticaJonathan.Connection
 {
