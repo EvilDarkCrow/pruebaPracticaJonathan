@@ -10,12 +10,12 @@ namespace pruebaPracticaJonathan.Controllers
 {
     [ApiController]
     [Route("lastOrder")]
-    public class LastOrderController: ControllerBase
+    public class Controller: ControllerBase
     {
         private readonly DbContexto context;
         private readonly Manager manager;
 
-        public LastOrderController(Manager manager)
+        public Controller(Manager manager)
         {
             this.manager = manager;
         }
